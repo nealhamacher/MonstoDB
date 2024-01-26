@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/MonstoDB/static/css/main.82dcedd2.css",
+    "main.js": "/MonstoDB/static/js/main.cdaf7047.js",
+    "static/js/787.8060a429.chunk.js": "/MonstoDB/static/js/787.8060a429.chunk.js",
+    "index.html": "/MonstoDB/index.html",
+    "main.82dcedd2.css.map": "/MonstoDB/static/css/main.82dcedd2.css.map",
+    "main.cdaf7047.js.map": "/MonstoDB/static/js/main.cdaf7047.js.map",
+    "787.8060a429.chunk.js.map": "/MonstoDB/static/js/787.8060a429.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.82dcedd2.css",
+    "static/js/main.cdaf7047.js"
+  ]
+}
