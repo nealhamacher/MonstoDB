@@ -10,3 +10,5 @@ connectDB();
 const nextID = getNextID();
 
 console.log(nextID);
+
+app.listen(port, function);
