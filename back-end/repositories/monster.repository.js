@@ -1,36 +1,35 @@
 import Monster from "../models/monster.model.js";
 
-const getNextID = async (query) => {
+const getNextIDRepo = async () => {
     try {
         const nextID = await Monster.countDocuments({}) + 1
         return nextID;
     } catch (error) {
-        throw Error("Error when getting next ID")
+        throw Error("Error when getting next ID: " , error)
     }
 };
 
-const createMonster = async (payload) => {
+const createMonsterRepo = async (payload) => {
     try {
         const newMonster = new Monster(payload);
         const savedMonster = await newMonster.save();
          return savedMonster;
     }
     catch (error) {
-        throw("Error while deleting the monster")
+        throw("Error while deleting the monster: ", error)
     }
 };
 
-
-const getMonsters = async (query) => {
+const getMonstersRepo = async (query) => {
     try {
         const monsters = await Monster.find(query);
-        return monsters
+        return monsters;
     } catch (error) {
-        throw Error("Error while getting monsters")
+        throw Error("Error while getting monsters: ", error)
     }
 }
 
-const updateMonster = async (query, update) = async (query, update) => {
+const updateMonsterRepo = async (query, update) => {
     try {
         const monster = await Monster.findOneAndUpdate(
             { ...query },
@@ -43,7 +42,7 @@ const updateMonster = async (query, update) = async (query, update) => {
     }
 };
 
-const deleteMonster = async (query) => {
+const deleteMonsterRepo = async (query) => {
     try {
         const monster = await Monster.findOneAndDelee({ ...query });
         return monster;
@@ -53,5 +52,5 @@ const deleteMonster = async (query) => {
 };
 
 
-export default { getNextID, createMonster, getMonsters, updateMonster, 
-    deleteMonster};
+export { getNextIDRepo, createMonsterRepo, getMonstersRepo, updateMonsterRepo, 
+    deleteMonsterRepo };
