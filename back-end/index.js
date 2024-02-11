@@ -9,6 +9,7 @@ const port = 8000;
 connectDB();
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.unsubscribe(bodyParser.json());
 
 app.use("/monsterdb", router)
