@@ -10,13 +10,19 @@ function App() {
   const [filteredMonsters, setFilteredMonsters] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   useEffect(() => {
     const fetchMonsters = async () => {
-      const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+      const response = await axios.get("http://localhost:8000/monsterdb", config);
       setMonsters(response.data);
     };
 
-    fetchMonsters();
+    fetchMonsters()
   }, []);
 
   useEffect(() => {

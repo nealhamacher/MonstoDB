@@ -1,19 +1,12 @@
 import Monster from "../models/monster.model.js";
 
-const getNextIDRepo = async () => {
-    try {
-        const nextID = await Monster.countDocuments({}) + 1
-        return nextID;
-    } catch (error) {
-        throw Error("Error when getting next ID: " , error)
-    }
-};
-
 const createMonsterRepo = async (payload) => {
     try {
+        const nextID = await Monster.countDocuments({}) + 1
         const newMonster = new Monster(payload);
         const savedMonster = await newMonster.save();
-         return savedMonster;
+        console.log(nextID);
+        return savedMonster;
     }
     catch (error) {
         throw("Error while deleting the monster: ", error)
@@ -52,5 +45,5 @@ const deleteMonsterRepo = async (query) => {
 };
 
 
-export { getNextIDRepo, createMonsterRepo, getMonstersRepo, updateMonsterRepo, 
+export { createMonsterRepo, getMonstersRepo, updateMonsterRepo, 
     deleteMonsterRepo };
