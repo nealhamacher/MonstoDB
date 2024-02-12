@@ -46,7 +46,11 @@ const updateMonster = async (req, res) => {
             { ...payload }
         );
         res.header("Access-Control-Allow-Origin", "*");
-        res.status(200).send(monster);
+        if (monster) {
+            res.status(200).send(monster);            
+        } else {
+            res.status(404).send("Monster not found, check ID#")
+        }
     } catch (e) {
         res.header("Access-Control-Allow-Origin", "*");
         res.status(500).send("Error while updating monster: ", error);
@@ -59,10 +63,10 @@ const deleteMonster = async (req, res) => {
         const monster = await deleteMonsterRepo(query);
         if (monster) {
             res.header("Access-Control-Allow-Origin", "*");
-            req.status(204).send(monster);
+            res.status(204).send("Delete successful");
         } else {
             res.header("Access-Control-Allow-Origin", "*");
-            req.status(404).send("Monster not found");
+            res.status(404).send("Monster not found");
         }
     } catch (error) {
         res.header("Access-Control-Allow-Origin", "*");
