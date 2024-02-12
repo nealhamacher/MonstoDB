@@ -37,7 +37,7 @@ const updateMonsterRepo = async (query, update) => {
 
 const deleteMonsterRepo = async (query) => {
     try {
-        const monster = await Monster.findOneAndDelee({ ...query });
+        const monster = await Monster.findOneAndDelete({ ...query });
         return monster;
     } catch (error) {
         throw Error ("Unable to delete")
