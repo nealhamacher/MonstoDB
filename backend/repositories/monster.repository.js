@@ -26,7 +26,11 @@ const createMonsterRepo = async (payload) => {
 
 const getMonstersRepo = async (query) => {
     try {
+        console.log("QUERY")
+        console.log(query)
         const monsters = await Monster.find(query);
+        console.log("MONSTERS")
+        console.log(monsters)
         return monsters;
     } catch (error) {
         throw Error("Error while getting monsters: ", error)
