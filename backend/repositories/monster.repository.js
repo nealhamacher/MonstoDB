@@ -1,15 +1,27 @@
 import Monster from "../models/monster.model.js";
 
+
+
 const createMonsterRepo = async (payload) => {
     try {
-        const nextID = await Monster.countDocuments({}) + 1
+        //Get nextID number as max ID in database + 1
+        let nextID = await Monster.countDocuments({});
+        const monsters = await Monster.find({});
+        monsters.map( (monster) => {
+            const id = monster.id;
+            nextID = Math.max(id, nextID);
+            }
+        )
+        nextID = nextID + 1
+        
+        payload = { ...payload, id: nextID}
         const newMonster = new Monster(payload);
         const savedMonster = await newMonster.save();
         console.log(nextID);
         return savedMonster;
     }
     catch (error) {
-        throw("Error while deleting the monster: ", error)
+        throw(error, "Error while creating the monster: ", error)
     }
 };
 
