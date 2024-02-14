@@ -5,19 +5,18 @@ import Monster from "../models/monster.model.js";
 const createMonsterRepo = async (payload) => {
     try {
         //Get nextID number as max ID in database + 1
-        let nextID = await Monster.countDocuments({});
         const monsters = await Monster.find({});
-        monsters.map( (monster) => {
-            const id = monster.id;
-            nextID = Math.max(id, nextID);
-            }
-        )
-        nextID = nextID + 1
+        const ids = monsters.map((monster) => {
+            return monster.id
+        });
+        let nextID = Math.max(...ids) + 1;
+        console.log(nextID);
+
         
         payload = { ...payload, id: nextID}
         const newMonster = new Monster(payload);
         const savedMonster = await newMonster.save();
-        console.log(nextID);
+    
         return savedMonster;
     }
     catch (error) {
@@ -38,8 +37,8 @@ const updateMonsterRepo = async (query, update) => {
     try {
         const monster = await Monster.findOneAndUpdate(
             { ...query },
-            { ...update},
-            { new: true},
+            { ...update },
+            { new: true },
         ).lean();
          return monster;
     } catch (error) {
