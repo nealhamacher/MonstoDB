@@ -50,6 +50,10 @@ const createMonster = async (req, res) => {
 const updateMonster = async (req, res) => {
     const query = { id: req.params.monsterID };
     const payload = {...req.body}
+    if(payload.hasOwnProperty("id")) {
+        res.status(403).send("Changing id is not allowed.")
+        return
+    }
     try { 
         const monster = await updateMonsterRepo (
             { ...query }, 
