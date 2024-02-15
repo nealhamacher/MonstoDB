@@ -2,7 +2,6 @@ import { getMonstersRepo, updateMonsterRepo, deleteMonsterRepo,
     createMonsterRepo } from "../repositories/monster.repository.js";
 
 const getMonsters = async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     try {
         const monsters = await getMonstersRepo();
         res.status(200).send(monsters);
@@ -13,8 +12,6 @@ const getMonsters = async (req, res) => {
 
 const getMonster = async (req, res) => {
     const query = { id: req.params.monsterID };
-    
-    res.header("Access-Control-Allow-Origin", "*");
     try {
         const monster = await getMonstersRepo(query);
         if (monster) {
@@ -30,8 +27,6 @@ const getMonster = async (req, res) => {
 
 const createMonster = async (req, res) => {
     const payload = { ...req.body };
-    
-    res.header("Access-Control-Allow-Origin", "*");
     if(!payload.hasOwnProperty("name")) {
         res.status(400).send("Missing required field: name")
         return
@@ -56,7 +51,6 @@ const createMonster = async (req, res) => {
 const updateMonster = async (req, res) => {
     const query = { id: req.params.monsterID };
     const payload = {...req.body}
-    res.header("Access-Control-Allow-Origin", "*");
     try { 
         const monster = await updateMonsterRepo (
             { ...query }, 
@@ -74,7 +68,6 @@ const updateMonster = async (req, res) => {
 
 const deleteMonster = async (req, res) => {
     const query = { id: req.params.monsterID };
-    res.header("Access-Control-Allow-Origin", "*");
     try {
         const monster = await deleteMonsterRepo(query);
         if (monster) {
