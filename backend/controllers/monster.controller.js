@@ -2,7 +2,6 @@ import { getMonstersRepo, updateMonsterRepo, deleteMonsterRepo,
     createMonsterRepo } from "../repositories/monster.repository.js";
 
 const getMonsters = async (req, res) => {
-            res.header("Access-Control-Allow-Origin", "*");
     try {
         const monsters = await getMonstersRepo();
         res.status(200).send(monsters);
@@ -15,7 +14,6 @@ const getMonster = async (req, res) => {
     const query = { id: req.params.monsterID };
     try {
         const monster = await getMonstersRepo(query);
-        res.header("Access-Control-Allow-Origin", "*");
         if (monster) {
             res.status(200).send(monster);
         } else {
@@ -29,7 +27,6 @@ const getMonster = async (req, res) => {
 const createMonster = async (req, res) => {
     const payload = { ...req.body };
     
-    res.header("Access-Control-Allow-Origin", "*");
     if(!payload.hasOwnProperty("name")) {
         res.status(400).send("Missing required field: name")
         return
@@ -63,7 +60,6 @@ const updateMonster = async (req, res) => {
             { ...query }, 
             { ...payload }
         );
-        res.header("Access-Control-Allow-Origin", "*");
         if (monster) {
             res.status(200).send(monster);            
         } else {
@@ -79,14 +75,11 @@ const deleteMonster = async (req, res) => {
     try {
         const monster = await deleteMonsterRepo(query);
         if (monster) {
-            res.header("Access-Control-Allow-Origin", "*");
             res.status(200).send("Delete successful");
         } else {
-            res.header("Access-Control-Allow-Origin", "*");
             res.status(404).send(`Monster with id# ${id} not found`)
         }
     } catch (error) {
-        res.header("Access-Control-Allow-Origin", "*");
         res.status(500).send("Database error when deleting monster");
     }
 };
