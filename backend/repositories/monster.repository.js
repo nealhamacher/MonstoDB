@@ -10,8 +10,6 @@ const createMonsterRepo = async (payload) => {
             return monster.id
         });
         let nextID = Math.max(...ids) + 1;
-        console.log(nextID);
-
         
         payload = { ...payload, id: nextID}
         const newMonster = new Monster(payload);
